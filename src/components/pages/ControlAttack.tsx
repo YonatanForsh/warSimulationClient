@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redax/store';
 import { useNavigate } from 'react-router-dom';
 import { io } from 'socket.io-client';
-import { fetchAttackShut } from '../../redax/slices/attackSlice';
+import { fetchAttackShut } from '../../redax/slices/actionSlice';
 
 export default function ControlAttack() {
   const dispatch = useAppDispatch();

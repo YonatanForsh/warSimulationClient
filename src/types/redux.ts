@@ -11,6 +11,12 @@ export interface userState {
     user: null | IUser;
 }
 
+export interface actionState {
+    error: string | null;
+    status: DataStatus;
+    action: [] | IAction[];
+}
+
 export interface IUser {
     _id: string
     username: string
@@ -23,4 +29,12 @@ export interface IOrg {
     name: string
     resources: []
     budget: number
+}
+
+export interface IAction {
+    _id: string
+    userAttackId: string
+    missile: string
+    area: string
+    status: string
 }

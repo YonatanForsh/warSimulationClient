@@ -57,46 +57,6 @@ export const fetchRegister = createAsyncThunk(
     }
 );
 
-export const fetchAttackShut = createAsyncThunk("user/attacks",
-    async (attack: { user_id: string, missileName: string, area: string }, thunkApi) => {
-        try {
-            console.log(JSON.stringify(attack));            
-            const res = await fetch("http://localhost:2020/api/attacks", {
-                method: "post",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(attack),
-            });
-            if (res.status != 200) {
-                thunkApi.rejectWithValue("Can't attack, please try again");
-            }
-            const data = await res.json();
-            thunkApi.fulfillWithValue(data);
-        } catch (err) {
-            thunkApi.rejectWithValue("Can't attack!, please try again");
-        }
-    }
-);
-
-export const fetchAction = createAsyncThunk("user/actions",
-    async (attack: { user_id: string, missileName: string, area: string }, thunkApi) => {
-        try {
-            console.log(JSON.stringify(attack));            
-            const res = await fetch("http://localhost:2020/api/attacks", {
-                method: "post",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(attack),
-            });
-            if (res.status != 200) {
-                thunkApi.rejectWithValue("Can't attack, please try again");
-            }
-            const data = await res.json();
-            thunkApi.fulfillWithValue(data);
-        } catch (err) {
-            thunkApi.rejectWithValue("Can't attack!, please try again");
-        }
-    }
-);
-
 
 const userSlice = createSlice({
     name: "user",
