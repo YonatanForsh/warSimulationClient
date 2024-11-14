@@ -35,6 +35,7 @@ export interface IAction {
     _id: string
     userAttackId: string
     missile: string
+    speed: number
     area: string
     status: string
 }

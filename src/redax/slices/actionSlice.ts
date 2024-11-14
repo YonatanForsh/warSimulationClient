@@ -43,7 +43,7 @@ export const fetchAttackShut = createAsyncThunk("api/attacks",
 );
 
 export const fetchIntercept = createAsyncThunk("api/protects", 
-    async (attack: { action_id: string }, thunkApi) => {
+    async (attack: { action_id: string, intercept_id: string }, thunkApi) => {
         try {
             console.log(JSON.stringify(attack));
             const res = await fetch("http://localhost:2020/api/protects", {
