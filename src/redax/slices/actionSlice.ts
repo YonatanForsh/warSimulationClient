@@ -7,13 +7,10 @@ const initialState: actionState = {
     action: [],
 };
 
-export const fetchActions = createAsyncThunk("user/actions",
+export const fetchActions = createAsyncThunk("api/actions",
     async (thunkApi) => {
-        try {
-            const res = await fetch("http://localhost:2020/api/actions", {
-                method: "get",
-                headers: { "Content-Type": "application/json" },
-            });
+        try {            
+            const res = await fetch("http://localhost:2020/api/actions");
             if (res.status != 200) {
                 return "Can't get actions, please try again"
                 // thunkApi.rejectWithValue("Can't attack, please try again");
@@ -62,7 +59,7 @@ const actionSlice = createSlice({
             .addCase(fetchActions.fulfilled, (state, action) => {
                 state.status = DataStatus.SUCCESS;
                 state.error = null;
-                state.action = action.payload as IAction[];
+                state.action = action.payload as IAction[];                
             })
             .addCase(fetchActions.rejected, (state, action) => {
                 state.status = DataStatus.FAILED;

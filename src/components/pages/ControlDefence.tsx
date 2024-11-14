@@ -1,24 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redax/store';
 import { fetchActions } from '../../redax/slices/actionSlice';
-import { socket } from '../../main';
 import { IAction } from '../../types/redux';
 
 export default function ControlDefence() {
   const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const { action } = useAppSelector((state) => state.action);
-  const [attacks, setAttacks] = useState<IAction[]>([])
+  const [attacks, setAttacks] = useState<IAction[]>([]);
   const org = user?.org.name;
 
-  useEffect( () => {
-    socket.on("attacks", (attack) => {
-      console.log(attack);
-      setAttacks(attack)
-    })
-  }, []);
+  useEffect(() => {
+    dispatch(fetchActions());
+  }, [dispatch]);
 
-  console.log(attacks);
+  useEffect(() => {
+    if (action && action.length > 0) {
+      setAttacks(action);
+    }
+  }, [action]);
+
+  if (!attacks || attacks.length === 0) {
+    return <p>Loading actions...</p>;
+  }
+
+  const intercept = () => {
+    // dispatch(fetchActions)
+  }
+
 
   return (
     <div className='controlDefence'>
@@ -47,7 +56,7 @@ export default function ControlDefence() {
               <tr key={index}>
                 <td>{item.missile}</td>
                 <td>{1}</td>
-                <td>{item.status}</td>
+                <td onClick={intercept}>{item.status} {item.status == "inAir" && "❌"}</td>
               </tr>
             ))}
           </tbody>
