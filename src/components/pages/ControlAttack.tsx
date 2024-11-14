@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../redax/store';
 import { useNavigate } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import { fetchAttackShut } from '../../redax/slices/actionSlice';
+import { socket } from '../../main';
 
 export default function ControlAttack() {
   const dispatch = useAppDispatch();
@@ -13,14 +14,16 @@ export default function ControlAttack() {
   const org = user?.org.name
 
   useEffect(() => {
-    if (user?._id)
+    if (!user?._id)
       navigate("/login")
   }, [])
+
+
+  // socket.emit("newAttack", { soket: socket, data: "ttt" })
 
   const shutAttack = (missileName: string) => {
     if (user?._id) {
       dispatch(fetchAttackShut({ user_id: user?._id, missileName: missileName, area: selectedLoc }))
-      // io.to("some room").emit("some event");
     }
   }
 
@@ -42,7 +45,7 @@ export default function ControlAttack() {
         </select>
         {
           ammo?.map((a: any, index) => (
-            <p key={index} onClick={ () => shutAttack(a.name) }>{a.name}{a.amount}</p>
+            <p key={index} onClick={() => shutAttack(a.name)}>{a.name}{a.amount}</p>
           ))
         }
       </div>

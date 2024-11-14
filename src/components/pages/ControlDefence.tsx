@@ -2,9 +2,12 @@ import { useEffect, useState, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redax/store';
 import { fetchActions, fetchIntercept } from '../../redax/slices/actionSlice';
 import { IAction } from '../../types/redux';
+import { socket } from '../../main';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function ControlDefence() {
   const { user } = useAppSelector((state) => state.user);
+  const navigate = useNavigate()
   const dispatch = useAppDispatch();
   const { action } = useAppSelector((state) => state.action);
   const [attacks, setAttacks] = useState<IAction[]>([]);
@@ -12,8 +15,20 @@ export default function ControlDefence() {
   const org = user?.org.name;
 
   useEffect(() => {
+    if (!user?._id)
+      navigate("/login")
+  }, [])
+
+
+  useEffect(() => {
     dispatch(fetchActions());
   }, [dispatch]);
+
+
+  socket.on("returnAttack", () => {    
+    dispatch(fetchActions())
+  })
+
 
   useEffect(() => {
     if (action && action.length > 0) {

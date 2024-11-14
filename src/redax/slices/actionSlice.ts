@@ -62,7 +62,6 @@ export const fetchIntercept = createAsyncThunk("api/protects",
     }
 );
 
-
 const actionSlice = createSlice({
     name: "action",
     initialState,
