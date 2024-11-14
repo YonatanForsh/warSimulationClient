@@ -27,6 +27,7 @@ export const fetchLogin = createAsyncThunk("user/login",
             }
             const data = await res.json();
             localStorage.setItem("token", data.token)
+            console.log(data);
             return data
             // thunkApi.fulfillWithValue(data);
         } catch (err) {

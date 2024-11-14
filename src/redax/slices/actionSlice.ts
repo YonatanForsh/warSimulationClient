@@ -13,19 +13,16 @@ export const fetchActions = createAsyncThunk("api/actions",
             const res = await fetch("http://localhost:2020/api/actions");
             if (res.status != 200) {
                 return "Can't get actions, please try again"
-                // thunkApi.rejectWithValue("Can't attack, please try again");
             }
             const data = await res.json();
             return data
-            // thunkApi.fulfillWithValue(data);
         } catch (err) {
             return "Can't attack!, please try again"
-            // thunkApi.rejectWithValue("Can't attack!, please try again");
         }
     }
 );
 
-export const fetchAttackShut = createAsyncThunk("user/attacks",
+export const fetchAttackShut = createAsyncThunk("api/attacks",
     async (attack: { user_id: string, missileName: string, area: string }, thunkApi) => {
         try {
             console.log(JSON.stringify(attack));            
@@ -44,6 +41,27 @@ export const fetchAttackShut = createAsyncThunk("user/attacks",
         }
     }
 );
+
+export const fetchIntercept = createAsyncThunk("api/protects", 
+    async (attack: { action_id: string }, thunkApi) => {
+        try {
+            console.log(JSON.stringify(attack));
+            const res = await fetch("http://localhost:2020/api/protects", {
+                method: "post",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(attack),
+            });
+            if (res.status != 200) {
+                thunkApi.rejectWithValue("Can't attack, please try again");
+            }
+            const data = await res.json();
+            thunkApi.fulfillWithValue(data);
+        } catch (err) {
+            thunkApi.rejectWithValue("Can't attack!, please try again");
+        }
+    }
+);
+
 
 const actionSlice = createSlice({
     name: "action",

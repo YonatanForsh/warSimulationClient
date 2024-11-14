@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../redax/store';
-import { fetchActions } from '../../redax/slices/actionSlice';
+import { fetchActions, fetchIntercept } from '../../redax/slices/actionSlice';
 import { IAction } from '../../types/redux';
 
 export default function ControlDefence() {
@@ -24,8 +24,8 @@ export default function ControlDefence() {
     return <p>Loading actions...</p>;
   }
 
-  const intercept = () => {
-    // dispatch(fetchActions)
+  const intercept = (actionId: string) => {
+    dispatch(fetchIntercept({ action_id: actionId }))
   }
 
 
@@ -56,7 +56,7 @@ export default function ControlDefence() {
               <tr key={index}>
                 <td>{item.missile}</td>
                 <td>{1}</td>
-                <td onClick={intercept}>{item.status} {item.status == "inAir" && "❌"}</td>
+                <td onClick={ () => intercept(item._id)}>{item.status} {item.status == "inAir" && "❌"}</td>
               </tr>
             ))}
           </tbody>
