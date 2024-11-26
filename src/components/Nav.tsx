@@ -1,4 +1,3 @@
-import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAppSelector } from '../redax/store'
 import { RootState } from '../redax/store'
