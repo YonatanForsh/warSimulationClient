@@ -1,4 +1,4 @@
-body{
+/* body{
   display: flex;
   justify-content: center;}
 
@@ -27,4 +27,102 @@ body{
 
 .headAttack{
   display: flex;
+} */
+
+:root {
+  --gradient-login: linear-gradient(135deg, #1e3c72, #2a5298);
+  --gradient-register: linear-gradient(135deg, #283593, #6a1b9a);
+  --gradient-defence: linear-gradient(135deg, #283593, #6a1b9a);
+  --gradient-attack: linear-gradient(135deg, #2c3e50, #34495e);
+  --text-color: #ffffff;
+  --hover-color: #ffcc80;
+  --border-radius: 10px;
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.common-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  max-width: 400px;
+  margin: 20px auto;
+  color: var(--text-color);
+  font-family: 'Arial', sans-serif;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.login {
+  height: 100vh;
+  background: var(--gradient-login);
+}
+
+.register, .controlDefence, .controlAttack {
+  background: var(--gradient-register);
+}
+
+h1, h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+p, input, button, select, table {
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 1rem;
+}
+
+input, button, select {
+  padding: 10px;
+  border: 2px solid var(--text-color);
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+input:focus, select:focus {
+  border-color: var(--hover-color);
+}
+
+button {
+  font-size: 1.2rem;
+  background-color: var(--hover-color);
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background-color: #ffa726;
+}
+
+table {
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+}
+
+th, td {
+  text-align: center;
+  padding: 15px;
+  border: 1px solid var(--text-color);
+}
+
+tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.controlDefence td span {
+  margin-left: 10px;
+  font-size: 1.2rem;
+  color: #ff1744;
+}
+
+.controlDefence td span:hover {
+  color: #d50000;
 }
