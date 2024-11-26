@@ -1,8 +1,3 @@
-// import { useAppSelector } from "../store";
-// import { combineReducers } from "redux";
-// import { useReducer } from "react";
-// import { io } from "socket.io-client";
-// import { socket } from "../../main";
 import { ActionReducerMapBuilder, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { DataStatus, IUser, userState } from "../../types/redux";
 
@@ -15,7 +10,7 @@ const initialState: userState = {
 export const fetchLogin = createAsyncThunk("user/login",
     async (user: { username: string; password: string }, thunkApi) => {
         try {
-            const res = await fetch("http://localhost:2020/api/users/login", {
+            const res = await fetch(process.env.BASE_URL || "http://localhost:2020/api/users/login", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -42,7 +37,7 @@ export const fetchRegister = createAsyncThunk(
     async (user: { username: string, password: string, org: string, location: string }, thunkApi) => {
         try {
             console.log(JSON.stringify(user));
-            const res = await fetch("http://localhost:2020/api/users/register", {
+            const res = await fetch(process.env.BASE_URL || "http://localhost:2020/api/users/register", {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user),
@@ -66,10 +61,6 @@ const userSlice = createSlice({
         logOut: (state) => {
             state.user = null
         },
-        // vote: (state, action) => {
-        //   state.user!.hasVoted = true,
-        //   state.user!.votedFor = action.payload
-        // }
     },
     extraReducers: (builder: ActionReducerMapBuilder<userState>) => {
         builder

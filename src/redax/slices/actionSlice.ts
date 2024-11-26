@@ -10,7 +10,7 @@ const initialState: actionState = {
 export const fetchActions = createAsyncThunk("api/actions",
     async () => {
         try {            
-            const res = await fetch("http://localhost:2020/api/actions");
+            const res = await fetch( process.env.BASE_URL || "http://localhost:2020/api/actions");
             if (res.status != 200) {
                 return "Can't get actions, please try again"
             }
@@ -26,7 +26,7 @@ export const fetchAttackShut = createAsyncThunk("api/attacks",
     async (attack: { user_id: string, missileName: string, area: string }, thunkApi) => {
         try {
             console.log(JSON.stringify(attack));            
-            const res = await fetch("http://localhost:2020/api/attacks", {
+            const res = await fetch(process.env.BASE_URL || "http://localhost:2020/api/attacks", {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(attack),
@@ -46,7 +46,7 @@ export const fetchIntercept = createAsyncThunk("api/protects",
     async (attack: { action_id: string, intercept_id: string }, thunkApi) => {
         try {
             console.log(JSON.stringify(attack));
-            const res = await fetch("http://localhost:2020/api/protects", {
+            const res = await fetch(process.env.BASE_URL || "http://localhost:2020/api/protects", {
                 method: "post",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(attack),
