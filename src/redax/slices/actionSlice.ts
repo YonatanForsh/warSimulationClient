@@ -8,7 +8,7 @@ const initialState: actionState = {
 };
 
 export const fetchActions = createAsyncThunk("api/actions",
-    async (thunkApi) => {
+    async () => {
         try {            
             const res = await fetch("http://localhost:2020/api/actions");
             if (res.status != 200) {

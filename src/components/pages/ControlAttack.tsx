@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redax/store';
 import { useNavigate } from 'react-router-dom';
-import { io } from 'socket.io-client';
 import { fetchAttackShut } from '../../redax/slices/actionSlice';
-import { socket } from '../../main';
 
 export default function ControlAttack() {
   const dispatch = useAppDispatch();
@@ -18,8 +16,6 @@ export default function ControlAttack() {
       navigate("/login")
   }, [])
 
-
-  // socket.emit("newAttack", { soket: socket, data: "ttt" })
 
   const shutAttack = (missileName: string) => {
     if (user?._id) {

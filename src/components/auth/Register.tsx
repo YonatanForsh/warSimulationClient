@@ -1,12 +1,9 @@
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../redax/store';
-import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../redax/store';
 import { fetchRegister } from '../../redax/slices/attackSlice';
 
 function Register() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
-  const { user } = useAppSelector((state) => state.user);
   const [username, setUserName] = useState("")
   const [password, setPassword] = useState("")
   const [selectedOrg, setSelectedOrg] = useState("");

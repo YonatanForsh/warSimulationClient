@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../redax/store';
 import { fetchActions, fetchIntercept } from '../../redax/slices/actionSlice';
 import { IAction } from '../../types/redux';
 import { socket } from '../../main';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function ControlDefence() {
   const { user } = useAppSelector((state) => state.user);
